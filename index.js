@@ -1,5 +1,8 @@
 const axios = require('axios');
 
+// Delay function to create a 1-second delay
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 let data = JSON.stringify({
   "candidate_entity_ids": [
     "cc150bc2-0f08-4ef6-ba30-95f3533b0436",
@@ -46,6 +49,11 @@ const testApi = async () => {
     const duration = end - start;
     totalTime += duration;
     console.log(`Request ${i + 1} took ${duration} ms`);
+
+    // Add a 1-second delay between each request
+    if (i < hits - 1) {
+      await sleep(1000); // Delay for 1 second
+    }
   }
 
   const averageTime = totalTime / hits;
